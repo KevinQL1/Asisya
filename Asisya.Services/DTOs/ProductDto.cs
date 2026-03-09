@@ -9,7 +9,7 @@ public class ProductCreateDto
     public short UnitsInStock { get; set; }
 }
 
-// DTO para la lista general (más ligero, sin foto)
+// DTO para la lista general
 public class ProductResponseDto
 {
     public int ProductId { get; set; }
@@ -20,12 +20,11 @@ public class ProductResponseDto
     public string? CategoryPicture { get; set; }
 }
 
-// DTO para el endpoint de Detalle (hereda del anterior e incluye la foto solicitada)
+// DTO para el endpoint de Detalle
 public class ProductDetailDto : ProductResponseDto
 {
     public string? QuantityPerUnit { get; set; }
     public bool Discontinued { get; set; }
-    public string? CategoryPicture { get; set; }
 }
 
 // DTO para recibir los datos del UPDATE (PUT)
