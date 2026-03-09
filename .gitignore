@@ -2,5 +2,8 @@
 [Bb]in/
 [Oo]bj/
 
+# Ignorar variables de entorno reales
+.env
+
 # Ignorar node_modules si tienes el frontend ahí mismo
 node_modules/

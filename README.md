@@ -22,7 +22,11 @@ Preparada para soportar altas cargas de trabajo y escalar horizontalmente:
 `git clone <URL_DEL_REPOSITORIO>`
 
 **Compilar y Ejecutar:**
-`Docker compose up -d --build`
+`dotnet build`
+`cd Asisya.Api`
+`dotnet ef database update`
+`dotnet run`
+`o haciendo uso de docker compose up -d --build`
 
 ## 🐳 4. Ejecución Local con Docker (Recomendada)
 El proyecto incluye un `Dockerfile` funcional y `docker-compose.yml`.
