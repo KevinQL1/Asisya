@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:15
+    container_name: asisya_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${USER}
+      POSTGRES_PASSWORD: ${PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${PORT_DB}:${PORT_DB}"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: asisya_api
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${PORT_API}:${PORT_API}"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${STAGE}
+      - DB_HOST=${DB_HOST}
+      - ConnectionStrings__DefaultConnection=Host=${DB_HOST};Port=${PORT_DB};Database=${DB_NAME};Username=${USER};Password=${PASSWORD}
+      - JWT_KEY=${JWT_KEY}
+      - JWT_ISSUER=${JWT_ISSUER}
+      - JWT_AUDIENCE=${JWT_AUDIENCE}
+      - PORT_API=${PORT_API}
