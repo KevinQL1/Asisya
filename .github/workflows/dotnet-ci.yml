@@ -47,4 +47,9 @@ jobs:
         DB_NAME: asisya_catalog
         USER: asisya_admin
         PASSWORD: password_seguro_ci
+        PORT_API: 5000
+        JWT_KEY: "esta_es_una_llave_super_secreta_para_pruebas_asisya_2026"
+        JWT_ISSUER: "AsisyaApi"
+        JWT_AUDIENCE: "AsisyaFront"
+        ASPNETCORE_ENVIRONMENT: Development
       run: dotnet test --no-build --configuration Release --verbosity normal
