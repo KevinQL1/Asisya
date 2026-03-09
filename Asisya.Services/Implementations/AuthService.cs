@@ -35,8 +35,15 @@ public class AuthService : IAuthService
                 LastName = dto.LastName,
                 Title = dto.Title,
                 TitleOfCourtesy = dto.TitleOfCourtesy,
-                BirthDate = dto.BirthDate,
-                HireDate = dto.HireDate ?? DateTime.UtcNow,
+                
+                BirthDate = dto.BirthDate.HasValue 
+                    ? DateTime.SpecifyKind(dto.BirthDate.Value, DateTimeKind.Utc) 
+                    : null,
+                
+                HireDate = dto.HireDate.HasValue 
+                    ? DateTime.SpecifyKind(dto.HireDate.Value, DateTimeKind.Utc) 
+                    : DateTime.UtcNow,
+
                 Address = dto.Address,
                 City = dto.City,
                 Region = dto.Region,
