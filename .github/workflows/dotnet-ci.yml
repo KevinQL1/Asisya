@@ -10,6 +10,21 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: asisya_admin
+          POSTGRES_PASSWORD: password_seguro_ci
+          POSTGRES_DB: asisya_catalog
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
     - name: Checkout del código
       uses: actions/checkout@v4
@@ -26,4 +41,10 @@ jobs:
       run: dotnet build --no-restore --configuration Release
 
     - name: Ejecutar Pruebas (Test)
+      env:
+        DB_HOST_LOCAL: 127.0.0.1
+        PORT_DB: 5432
+        DB_NAME: asisya_catalog
+        USER: asisya_admin
+        PASSWORD: password_seguro_ci
       run: dotnet test --no-build --configuration Release --verbosity normal
