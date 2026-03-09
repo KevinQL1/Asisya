@@ -20,19 +20,9 @@ Preparada para soportar altas cargas de trabajo y escalar horizontalmente:
 
 **Clonar y Configurar:**
 `git clone <URL_DEL_REPOSITORIO>`
-`cd Asisya`
-
-Crea un archivo `.env` en la raíz con la siguiente configuración:
-`ConnectionStrings__DefaultConnection=Host=localhost;Database=AsisyaDB;Username=tu_usuario;Password=tu_password`
-`JWT_KEY=UnaClaveSecretaMuyLargaYSeguraParaProduccion123!`
-`JWT_ISSUER=AsisyaApi`
-`JWT_AUDIENCE=AsisyaClient`
 
 **Compilar y Ejecutar:**
-`dotnet build`
-`cd Asisya.Api`
-`dotnet ef database update`
-`dotnet run`
+`Docker compose up -d --build`
 
 ## 🐳 4. Ejecución Local con Docker (Recomendada)
 El proyecto incluye un `Dockerfile` funcional y `docker-compose.yml`.
